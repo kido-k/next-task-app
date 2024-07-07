@@ -1,13 +1,32 @@
+import { TaskDocument } from '@/app/modules/task'
 import TaskCard from '@/components/TaskCard/TaskCard'
 
-const CompletedTaskPage = () => {
+const getCompletedTasks = async (): Promise<TaskDocument[]> => {
+  const url: string = `${process.env.API_URL}/tasks/completed`
+  const response = await fetch(url, {
+    cache: 'no-store',
+  })
+
+  if (response.status !== 200) {
+    throw new Error()
+  }
+
+  const data = await response.json()
+  return data.tasks as TaskDocument[]
+}
+
+const CompletedTaskPage = async () => {
+  const completedTasks = (await getCompletedTasks()) || []
+
   return (
     <div className='h-full overflow-y-auto p-8 pb-24 text-gray-800'>
       <header className='flex items-center justify-between'>
         <h1 className='flex items-center text-2xl font-bold'>Completed Tasks</h1>
       </header>
       <div className='mt-8 flex flex-wrap gap-4'>
-        <TaskCard />
+        {completedTasks.map((task) => (
+          <TaskCard key={task._id} task={task} />
+        ))}
       </div>
     </div>
   )

@@ -1,6 +1,11 @@
 import { TaskDocument } from '@/app/modules/task'
 import TaskCard from '@/components/TaskCard/TaskCard'
 
+interface TaskResponse {
+  message: string
+  tasks: TaskDocument[]
+}
+
 const getCompletedTasks = async (): Promise<TaskDocument[]> => {
   const url: string = `${process.env.API_URL}/tasks/completed`
   const response = await fetch(url, {
@@ -11,8 +16,8 @@ const getCompletedTasks = async (): Promise<TaskDocument[]> => {
     throw new Error()
   }
 
-  const data = await response.json()
-  return data.tasks as TaskDocument[]
+  const data: TaskResponse = await response.json()
+  return data.tasks
 }
 
 const CompletedTaskPage = async () => {

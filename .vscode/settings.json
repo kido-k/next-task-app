@@ -1,18 +1,14 @@
 {
   "editor.tabSize": 2,
   "editor.tabCompletion": "on",
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
     // "source.fixAll.stylelint": true
   },
+  "eslint.experimental.useFlatConfig": true,
   "eslint.useESLintClass": true,
   "eslint.workingDirectories": [
     {

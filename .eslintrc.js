@@ -16,6 +16,7 @@ module.exports = {
   root: true,
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/no-explicit-any": "warn"
+    "@typescript-eslint/no-explicit-any": "warn",
+    '@typescript-eslint/no-unsafe-assignment': 'off'
   }
 }

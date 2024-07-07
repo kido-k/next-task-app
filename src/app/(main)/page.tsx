@@ -3,6 +3,11 @@ import { MdAddTask } from 'react-icons/md'
 import { TaskDocument } from '../modules/task'
 import TaskCard from '@/components/TaskCard/TaskCard'
 
+interface TaskResponse {
+  message: string
+  tasks: TaskDocument[]
+}
+
 const getAllTasks = async (): Promise<TaskDocument[]> => {
   const url: string = `${process.env.API_URL}/tasks`
   const response = await fetch(url, {
@@ -13,8 +18,8 @@ const getAllTasks = async (): Promise<TaskDocument[]> => {
     throw new Error()
   }
 
-  const data = await response.json()
-  return data.tasks as TaskDocument[]
+  const data: TaskResponse = await response.json()
+  return data.tasks
 }
 
 export default async function MainPage() {

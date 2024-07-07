@@ -5,13 +5,18 @@ interface Prams {
   params: { id: string }
 }
 
+interface TaskResponse {
+  message: string
+  task: TaskDocument
+}
+
 const getTask = async (id: string): Promise<TaskDocument> => {
   const url: string = `${process.env.API_URL}/tasks/${id}`
   const response = await fetch(url, {
     cache: 'no-store',
   })
-  const data = await response.json()
-  return data.task as TaskDocument
+  const data: TaskResponse = await response.json()
+  return data.task
 }
 
 const EditTaskPage = async ({ params }: Prams) => {
